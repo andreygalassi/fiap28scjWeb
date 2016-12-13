@@ -31,7 +31,7 @@ public class FilterLogin implements Filter {
 		Usuario usuario = (Usuario) session.getAttribute("session_usuario");
 		
 		if (usuario==null){
-			((HttpServletResponse)response).sendRedirect("/Aula_ServletJsp/login.jsp");
+			((HttpServletResponse)response).sendRedirect("/Aula_Servelet_Jsp/login.jsp");
 		}else{
 			chain.doFilter(request, response);			
 		}

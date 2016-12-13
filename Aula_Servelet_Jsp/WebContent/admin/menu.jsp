@@ -5,15 +5,6 @@
 <title>Menu de Opções</title>
 </head>
 <body>
-	<%
-		Usuario usuario = (Usuario) session.getAttribute("session_usuario");
-
-		if (usuario == null) {
-			response.sendRedirect("../login.jsp");
-		} else {
-			out.print("Seja bem-vindo!" + usuario.getNome());
-		}
-	%>
 
 	<h1>Menu de Opções</h1>
 
