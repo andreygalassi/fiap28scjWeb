@@ -14,7 +14,12 @@
 			<td colspan="2">Opções</td>
 		</tr>
 		<c:forEach var="book" items="${livro.listaLivros}">
-			
+			<tr>
+				<td>${book.codigo }</td>
+				<td>${book.titulo }</td>
+				<td><a href="consultarLivro?codigo=${book.codigo }">Detalhes</a></td>
+				<td><a href="consultarSinopse?codigo=${book.codigo }">Sinopse</a></td>
+			</tr>
 		</c:forEach>
 	</table>	
 </body>
