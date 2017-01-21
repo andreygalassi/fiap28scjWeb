@@ -1,13 +1,10 @@
 package br.com.fiap.dao;
 
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-
-import br.com.fiap.entity.Usuario;
-
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 
 public class GenericDao<T> implements Dao<T> {
 
@@ -22,14 +19,7 @@ public class GenericDao<T> implements Dao<T> {
 		this.classe = classe;
 	}
 	
-//	protected T getDelegate() {
-//		if (this.classe == null) {
-//			this.classe = Beans.getReference(getDelegateClass());
-//		}
-//
-//		return this.delegate;
-//	}
-
+	@SuppressWarnings("unchecked")
 	protected Class<T> getClasse() {
 		if (this.classe == null) {
 			Type type = this.getClass();
@@ -39,7 +29,6 @@ public class GenericDao<T> implements Dao<T> {
 			} catch (ClassCastException cause) {
 				paramType = (ParameterizedType) ((Class<T>) type).getGenericSuperclass();
 			}
-//			this.classe = Reflections.getGenericTypeArgument(this.getClass(), 2);
 			this.classe = (Class<T>) paramType.getActualTypeArguments()[0];
 		}
 
@@ -72,24 +61,6 @@ public class GenericDao<T> implements Dao<T> {
 		em.close();
 
 		return entidade;
-	}
-	
-	public static void main(String[] args) {
-		GenericDao<Usuario> uDao = new GenericDao<>(Usuario.class);
-		
-		Type type = uDao.getClasse();
-
-		ParameterizedType paramType;
-		try {
-			paramType = (ParameterizedType) type;
-		} catch (ClassCastException cause) {
-			paramType = (ParameterizedType) ((Class<Usuario>) type).getGenericSuperclass();
-		}
-
-		System.out.println(paramType.getActualTypeArguments()[0]);
-		System.out.println(paramType.getActualTypeArguments()[1]);
-		System.out.println(paramType.getActualTypeArguments()[2]);
-		System.out.println(paramType.getActualTypeArguments()[3]);
 	}
 
 }
