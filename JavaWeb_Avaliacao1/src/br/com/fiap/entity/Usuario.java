@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -24,16 +26,17 @@ public class Usuario implements Serializable {
 	@Column(name = "SENHA")
 	private String senha;
 
-	@Column(name = "NIVEL")
-	private int nivel;
+	@Column(name = "TIPO_USUARIO")
+	@Enumerated(EnumType.STRING)
+	private TipoUsuario tipoUsuario;
 
-	public Usuario() {
-	}
+	@Deprecated
+	public Usuario() {}
 
-	public Usuario(String nome, String senha, int nivel) {
+	public Usuario(String nome, String senha, TipoUsuario tipoUsuario) {
 		setNome(nome);
 		setSenha(senha);
-		setNivel(nivel);
+		setTipoUsuario(tipoUsuario);
 	}
 
 	public Integer getId() {
@@ -60,11 +63,11 @@ public class Usuario implements Serializable {
 		this.senha = senha;
 	}
 
-	public int getNivel() {
-		return nivel;
+	public TipoUsuario getTipoUsuario() {
+		return tipoUsuario;
 	}
 
-	public void setNivel(int nivel) {
-		this.nivel = nivel;
+	public void setTipoUsuario(TipoUsuario tipoUsuario) {
+		this.tipoUsuario = tipoUsuario;
 	}
 }

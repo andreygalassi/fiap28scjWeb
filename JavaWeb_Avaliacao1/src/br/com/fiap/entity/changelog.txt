@@ -1,0 +1,4 @@
+22/01/2017
+	Andrey
+		IMPROVE: tipo de usuário para controle de permissões
+		IMPROVE: cadastro de 1 usuário admin automaticamente quando o banco de dados está vazio 

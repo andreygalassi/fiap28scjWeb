@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.com.fiap.dao.GenericDao;
+import br.com.fiap.entity.TipoUsuario;
 import br.com.fiap.entity.Usuario;
 
 /**
@@ -36,13 +37,13 @@ public class ServeletCadastroUsuarios extends HttpServlet {
 		try {
 			String nome = request.getParameter("nome");
 			String senha = request.getParameter("senha");
-
-			int nivel = Integer.parseInt(request.getParameter("nivel"));
+			
+			TipoUsuario tipoUsuario = TipoUsuario.valueOf(request.getParameter("tipoUsuario"));
 
 			Usuario usuario = new Usuario();
 			usuario.setNome(nome);
 			usuario.setSenha(senha);
-			usuario.setNivel(nivel);
+			usuario.setTipoUsuario(tipoUsuario);
 
 			GenericDao<Usuario> dao = new GenericDao<>(Usuario.class);
 			dao.adicionar(usuario);

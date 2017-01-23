@@ -1,7 +1,10 @@
 package br.com.fiap.dao;
 
+import java.util.List;
+
 import javax.persistence.Query;
 
+import br.com.fiap.entity.TipoUsuario;
 import br.com.fiap.entity.Usuario;
 
 public class UsuarioDao extends GenericDao<Usuario> {
@@ -16,4 +19,11 @@ public class UsuarioDao extends GenericDao<Usuario> {
 		return (Usuario) query.getSingleResult();
 	}
 	
+	public void start(){
+		List<Usuario> listar = listar();
+		if (listar==null || listar.size()==0){
+			Usuario usuario = new Usuario("admin", "admin", TipoUsuario.ADMINISTRATIVO);
+			adicionar(usuario);
+		}
+	}
 }

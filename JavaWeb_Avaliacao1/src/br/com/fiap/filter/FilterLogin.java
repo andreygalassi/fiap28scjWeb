@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import br.com.fiap.dao.UsuarioDao;
 import br.com.fiap.entity.Usuario;
 
 @WebFilter("/admin/*")
@@ -39,6 +40,10 @@ public class FilterLogin implements Filter {
 
 	public void init(FilterConfig fConfig) throws ServletException {
 		// TODO Auto-generated method stub
+		System.out.println("Iniciando");
+		UsuarioDao usuarioDao = new UsuarioDao();
+		usuarioDao.start();
+		System.out.println("Iniciado");
 	}
 
 }
