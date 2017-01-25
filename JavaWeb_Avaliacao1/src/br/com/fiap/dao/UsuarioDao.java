@@ -13,7 +13,7 @@ public class UsuarioDao extends GenericDao<Usuario> {
 
 		em = JpaUtil.getEntityManager();
 		em.getTransaction().begin();
-		Query query = em.createQuery("select u from usuario u where nome = :nome and senha = :senha");
+		Query query = em.createQuery("select u from Usuario u where nome = :nome and senha = :senha");
 		query.setParameter("nome", nome);
 		query.setParameter("senha", senha);
 		return (Usuario) query.getSingleResult();

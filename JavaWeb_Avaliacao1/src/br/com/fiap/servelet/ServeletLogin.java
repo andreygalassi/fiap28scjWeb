@@ -17,10 +17,10 @@ import br.com.fiap.entity.Usuario;
  * Servlet implementation class ServeletLogin
  */
 @WebServlet(
-		urlPatterns = { "/login" }, 
+		urlPatterns = { "/" }, 
 		initParams = { 
-				@WebInitParam(name = "user", value = "admin"), 
-				@WebInitParam(name = "pwd", value = "admin")
+				@WebInitParam(name = "nome", value = "admin"), 
+				@WebInitParam(name = "senha", value = "admin")
 		})
 public class ServeletLogin extends HttpServlet {
 	
