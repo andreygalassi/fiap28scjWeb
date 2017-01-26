@@ -8,14 +8,14 @@
 </head>
 <body>
 	<h1>Cadastro de Escola</h1>
-	<form action="cadLivros" method="post" >
+	<form action="inserir" method="post" >
 		Id:<br/>
 		<input type="text" name="id" size="10"><br/>
 		Descrição:<br/>
 		<input type="text" name="descricao" size="30"><br/>
 		
 		<input type="submit" value="Incluir"/>
-		${msg};
+		${msg}
 	</form>
 </body>
 </html>

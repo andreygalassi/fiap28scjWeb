@@ -3,10 +3,13 @@ package br.com.fiap.entity;
 import java.io.Serializable;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -24,6 +27,9 @@ public class Professor implements Serializable {
 
 	@OneToMany(mappedBy="professor")
 	private Set<Disciplina> disciplinas;
+	
+	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.MERGE)
+	private Escola escola; // many-to-many
 
 	public Integer getId() {
 		return Id;
@@ -47,6 +53,14 @@ public class Professor implements Serializable {
 
 	public void setDisciplinas(Set<Disciplina> disciplinas) {
 		this.disciplinas = disciplinas;
+	}
+
+	public Escola getEscola() {
+		return escola;
+	}
+
+	public void setEscola(Escola escola) {
+		this.escola = escola;
 	}
 
 }

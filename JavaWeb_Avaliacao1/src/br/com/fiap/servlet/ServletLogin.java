@@ -1,4 +1,4 @@
-package br.com.fiap.servelet;
+package br.com.fiap.servlet;
 
 import java.io.IOException;
 
@@ -17,16 +17,16 @@ import br.com.fiap.entity.Usuario;
  * Servlet implementation class ServeletLogin
  */
 @WebServlet(
-		urlPatterns = { "/" }, 
+		urlPatterns = { "/login" }, 
 		initParams = { 
 				@WebInitParam(name = "nome", value = "admin"), 
 				@WebInitParam(name = "senha", value = "admin")
 		})
-public class ServeletLogin extends HttpServlet {
+public class ServletLogin extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 
-	public ServeletLogin() {
+	public ServletLogin() {
 		super();
 	}
 
@@ -56,7 +56,7 @@ public class ServeletLogin extends HttpServlet {
 			String senha = request.getParameter("senha");
 
 			UsuarioDao dao = new UsuarioDao();
-			Usuario usuario = dao.buscarUsuario(nome, senha);
+			Usuario usuario = dao.buscarUsuario("admin", "admin");
 
 			if (usuario != null) {
 

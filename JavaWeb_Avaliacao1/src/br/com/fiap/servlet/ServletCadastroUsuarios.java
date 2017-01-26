@@ -1,4 +1,4 @@
-package br.com.fiap.servelet;
+package br.com.fiap.servlet;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -15,10 +15,10 @@ import br.com.fiap.entity.Usuario;
  * Servlet implementation class ServeletCadastroUsuarios
  */
 @WebServlet("/admin/cadUsuarios")
-public class ServeletCadastroUsuarios extends HttpServlet {
+public class ServletCadastroUsuarios extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public ServeletCadastroUsuarios() {
+	public ServletCadastroUsuarios() {
 		super();
 
 	}
