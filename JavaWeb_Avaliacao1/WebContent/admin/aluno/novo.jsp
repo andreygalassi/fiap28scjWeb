@@ -5,16 +5,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Cadastro de Professor</title>
+<title>Cadastro de Aluno</title>
 </head>
 <body>
-	<h1>Cadastro de Professor</h1>
+	<h1>Cadastro de Aluno</h1>
 	<form action="inserir" method="post" >
 		Nome: <input type="text" name="nome" size="30"><br/>
 		</br>
-		* Escola: <select name="escola" required multiple>
+		* Curso: <select name="curso" required>
 		  <option value=""></option>
-          <c:forEach var="item" items="${escolas}">
+          <c:forEach var="item" items="${cursos}">
             <option value="${item.id}">${item.descricao}</option>
           </c:forEach>
         </select>

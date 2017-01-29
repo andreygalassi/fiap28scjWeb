@@ -3,6 +3,8 @@ package br.com.fiap.servlet.professor;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -40,14 +42,20 @@ public class ServletProfessorInserir extends HttpServlet {
 		InputStream inputStream = null;
 		try {
 			String nome = request.getParameter("nome");
-			int idEscola = Integer.parseInt(request.getParameter("escola"));
+			String[] idEscolas = request.getParameterValues("escola");
+			Set<Escola> escolas = new HashSet<>();
+			
+			GenericDao<Escola> daoEscola = new GenericDao<Escola>(Escola.class);
+			
+			for(String idEscola : idEscolas)
+			{
+				escolas.add(daoEscola.buscar(Integer.parseInt(idEscola)));
+			}
 
 			Professor professor = new Professor();
 			professor.setNome(nome);
 			
-			GenericDao<Escola> daoEscola = new GenericDao<Escola>(Escola.class);
-			Escola escola = daoEscola.buscar(idEscola);
-			professor.setEscola(escola);
+			professor.setEscolas(escolas);
 			
 			GenericDao<Professor> dao = new GenericDao<Professor>(Professor.class);
 			dao.adicionar(professor);

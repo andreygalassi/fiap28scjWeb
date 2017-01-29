@@ -11,7 +11,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+
+import br.com.fiap.dao.GenericDao;
 
 @Entity
 @Table(name = "aluno")
@@ -30,6 +34,12 @@ public class Aluno implements Serializable {
 	
 	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.MERGE)
 	private Curso curso;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	private Nota nota;
+
+	@OneToOne(cascade=CascadeType.MERGE, fetch=FetchType.LAZY)
+	private Usuario usuario;
 
 	public Integer getId() {
 		return Id;
@@ -62,6 +72,26 @@ public class Aluno implements Serializable {
 	public void setCurso(Curso curso) {
 		this.curso = curso;
 	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 	
+	public List<Aluno> getListaAlunos(){
+		GenericDao<Aluno> dao = new GenericDao<>(Aluno.class);
+		return dao.listar();
+	}
+
+	public Nota getNota() {
+		return nota;
+	}
+
+	public void setNota(Nota nota) {
+		this.nota = nota;
+	}
 
 }

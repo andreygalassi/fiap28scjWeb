@@ -1,6 +1,7 @@
 package br.com.fiap.entity;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -9,9 +10,12 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import br.com.fiap.dao.GenericDao;
 
 @Entity
 @Table(name = "professor")
@@ -22,14 +26,17 @@ public class Professor implements Serializable {
 	@GeneratedValue
 	@Column(name = "ID")
 	private Integer Id;
-	
+
 	private String nome;
 
-	@OneToMany(mappedBy="professor")
+	@OneToMany(mappedBy = "professor")
 	private Set<Disciplina> disciplinas;
-	
-	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.MERGE)
-	private Escola escola; // many-to-many
+
+	@OneToOne(cascade=CascadeType.MERGE, fetch=FetchType.LAZY)
+	private Usuario usuario;
+
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	private Set<Escola> escolas;
 
 	public Integer getId() {
 		return Id;
@@ -55,12 +62,25 @@ public class Professor implements Serializable {
 		this.disciplinas = disciplinas;
 	}
 
-	public Escola getEscola() {
-		return escola;
+	public Set<Escola> getEscolas() {
+		return escolas;
 	}
 
-	public void setEscola(Escola escola) {
-		this.escola = escola;
+	public void setEscolas(Set<Escola> escolas) {
+		this.escolas = escolas;
+	}
+
+	public List<Professor> getListaProfessores() {
+		GenericDao<Professor> dao = new GenericDao<>(Professor.class);
+		return dao.listar();
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 }

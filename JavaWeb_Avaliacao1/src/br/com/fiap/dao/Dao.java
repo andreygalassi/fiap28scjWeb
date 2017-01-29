@@ -9,4 +9,6 @@ public interface Dao<T> {
 	List<T> listar();
 
 	T buscar(int id);
+
+	void alterar(T entidade);
 }

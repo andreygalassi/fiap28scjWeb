@@ -42,7 +42,15 @@ public class GenericDao<T> implements Dao<T> {
 		em.persist(entidade);
 		em.getTransaction().commit();
 		em.close();
-
+	}
+	
+	@Override
+	public void alterar(T entidade) {
+		em = JpaUtil.getEntityManager();
+		em.getTransaction().begin();
+		em.merge(entidade);
+		em.getTransaction().commit();
+		em.close();
 	}
 
 	@SuppressWarnings("unchecked")

@@ -1,6 +1,7 @@
 package br.com.fiap.entity;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -13,6 +14,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import br.com.fiap.dao.GenericDao;
+
 @Entity
 @Table(name = "escola")
 public class Escola implements Serializable {
@@ -22,16 +25,16 @@ public class Escola implements Serializable {
 	@GeneratedValue
 	@Column(name = "ID")
 	private Integer Id;
-	
+
 	private String descricao;
-	
-	@OneToMany(mappedBy="escola")
+
+	@OneToMany(mappedBy = "escola")
 	private Set<Curso> cursos;
 
-	@ManyToMany(fetch=FetchType.LAZY, cascade=CascadeType.MERGE)
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	private Set<Professor> professors;
 
-	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.MERGE)
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	private Set<Aluno> alunos;
 
 	public Integer getId() {
@@ -72,6 +75,11 @@ public class Escola implements Serializable {
 
 	public void setAlunos(Set<Aluno> alunos) {
 		this.alunos = alunos;
+	}
+
+	public List<Escola> getListaEscolas() {
+		GenericDao<Escola> dao = new GenericDao<>(Escola.class);
+		return dao.listar();
 	}
 
 }

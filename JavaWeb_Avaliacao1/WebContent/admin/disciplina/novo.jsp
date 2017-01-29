@@ -5,17 +5,22 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Cadastro de Professor</title>
+<title>Cadastro de Disciplina</title>
 </head>
 <body>
-	<h1>Cadastro de Professor</h1>
+	<h1>Cadastro de Disciplina</h1>
 	<form action="inserir" method="post" >
-		Nome: <input type="text" name="nome" size="30"><br/>
+		Descrição: <input type="text" name="descricao" size="30"><br/>
 		</br>
-		* Escola: <select name="escola" required multiple>
-		  <option value=""></option>
-          <c:forEach var="item" items="${escolas}">
+		* Curso: <select name="curso" required multiple>
+          <c:forEach var="item" items="${cursos}">
             <option value="${item.id}">${item.descricao}</option>
+          </c:forEach>
+        </select>
+		</br></br>
+		* Alunos: <select name="aluno" required multiple>
+          <c:forEach var="item" items="${alunos}">
+            <option value="${item.id}">${item.nome}</option>
           </c:forEach>
         </select>
 		</br></br>

@@ -1,6 +1,7 @@
 package br.com.fiap.entity;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -13,6 +14,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import br.com.fiap.dao.GenericDao;
+
 @Entity
 @Table(name = "curso")
 public class Curso implements Serializable {
@@ -22,16 +25,16 @@ public class Curso implements Serializable {
 	@GeneratedValue
 	@Column(name = "ID")
 	private Integer Id;
-	
+
 	private String descricao;
 
-	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.MERGE)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	private Professor professor;
 
-	@ManyToMany(mappedBy="cursos")
+	@ManyToMany(mappedBy = "cursos", fetch=FetchType.EAGER)
 	private Set<Disciplina> disciplinas;
 
-	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.MERGE)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	private Escola escola;
 
 	public Integer getId() {
@@ -72,6 +75,11 @@ public class Curso implements Serializable {
 
 	public void setEscola(Escola escola) {
 		this.escola = escola;
+	}
+
+	public List<Curso> getListaCursos() {
+		GenericDao<Curso> dao = new GenericDao<>(Curso.class);
+		return dao.listar();
 	}
 
 }
