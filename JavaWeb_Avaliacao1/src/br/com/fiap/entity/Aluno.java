@@ -1,6 +1,7 @@
 package br.com.fiap.entity;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -12,7 +13,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import br.com.fiap.dao.GenericDao;
@@ -38,7 +38,7 @@ public class Aluno implements Serializable {
 	@OneToOne(cascade = CascadeType.ALL)
 	private Nota nota;
 
-	@OneToOne(cascade=CascadeType.MERGE, fetch=FetchType.LAZY)
+	@OneToOne(cascade={CascadeType.MERGE,CascadeType.PERSIST}, fetch=FetchType.LAZY)
 	private Usuario usuario;
 
 	public Integer getId() {

@@ -19,5 +19,6 @@
 			</tr>
 		</c:forEach>
 	</table>
+		<a href="../menu.jsp">Voltar</a>
 </body>
 </html>

@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import br.com.fiap.dao.UsuarioDao;
+import br.com.fiap.entity.TipoUsuario;
 import br.com.fiap.entity.Usuario;
 
 @WebFilter("/admin/*")
@@ -34,6 +35,37 @@ public class FilterLogin implements Filter {
 		if (usuario==null){
 			((HttpServletResponse)response).sendRedirect("/JavaWeb_Avaliacao1/login.jsp");
 		}else{
+			String path = ((HttpServletRequest)request).getServletPath();
+			if (path.contains("aluno")){
+				if (usuario.getTipoUsuario()!=TipoUsuario.ADMINISTRATIVO){
+					((HttpServletResponse)response).sendRedirect("/JavaWeb_Avaliacao1/admin/menu.jsp?msg='Sem Altorização'");
+				}
+			}else if (path.contains("curso")){
+				if (usuario.getTipoUsuario()!=TipoUsuario.ADMINISTRATIVO){
+					((HttpServletResponse)response).sendRedirect("/JavaWeb_Avaliacao1/admin/menu.jsp?msg='Sem Altorização'");
+				}
+			}else if (path.contains("disciplina")){
+				if (usuario.getTipoUsuario()!=TipoUsuario.ADMINISTRATIVO){
+					((HttpServletResponse)response).sendRedirect("/JavaWeb_Avaliacao1/admin/menu.jsp?msg='Sem Altorização'");
+				}
+			}else if (path.contains("escola")){
+				if (usuario.getTipoUsuario()!=TipoUsuario.ADMINISTRATIVO){
+					((HttpServletResponse)response).sendRedirect("/JavaWeb_Avaliacao1/admin/menu.jsp?msg='Sem Altorização'");
+				}
+			}else if (path.contains("provessor")){
+				if (usuario.getTipoUsuario()!=TipoUsuario.ADMINISTRATIVO){
+					((HttpServletResponse)response).sendRedirect("/JavaWeb_Avaliacao1/admin/menu.jsp?msg='Sem Altorização'");
+				}
+			}else if (path.contains("usuario")){
+				if (usuario.getTipoUsuario()!=TipoUsuario.ADMINISTRATIVO){
+					((HttpServletResponse)response).sendRedirect("/JavaWeb_Avaliacao1/admin/menu.jsp?msg='Sem Altorização'");
+				}
+			}else if (path.contains("Notas")){
+				if (usuario.getTipoUsuario()==TipoUsuario.ADMINISTRATIVO){
+					((HttpServletResponse)response).sendRedirect("/JavaWeb_Avaliacao1/admin/menu.jsp?msg='Sem Altorização'");
+				}
+			}
+			
 			chain.doFilter(request, response);			
 		}
 	}

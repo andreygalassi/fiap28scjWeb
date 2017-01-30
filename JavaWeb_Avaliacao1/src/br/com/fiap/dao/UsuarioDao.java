@@ -19,6 +19,22 @@ public class UsuarioDao extends GenericDao<Usuario> {
 		return (Usuario) query.getSingleResult();
 	}
 	
+	/**
+	 * true para nome de usuário já utilizado
+	 * @param nome
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public Boolean existe(String nome){
+		em = JpaUtil.getEntityManager();
+		em.getTransaction().begin();
+		Query query = em.createQuery("select u from Usuario u where nome = :nome");
+		query.setParameter("nome", nome);
+		List<Usuario> resultado = query.getResultList();
+		
+		return (resultado==null || resultado.size()==0?false:true);
+	}
+	
 	public void start(){
 		List<Usuario> listar = listar();
 		if (listar==null || listar.size()==0){

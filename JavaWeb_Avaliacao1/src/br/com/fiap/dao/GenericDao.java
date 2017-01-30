@@ -5,6 +5,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 
 public class GenericDao<T> implements Dao<T> {
 

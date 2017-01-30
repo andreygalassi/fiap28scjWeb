@@ -12,6 +12,7 @@
 		Descrição: <input type="text" name="descricao" size="30">
 		</br></br>
 		<input type="submit" value="Incluir"/>
+		<a href="../menu.jsp">Voltar</a>
 		${msg}
 	</form>
 </body>

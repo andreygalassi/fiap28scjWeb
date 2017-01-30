@@ -9,7 +9,7 @@
 </head>
 <body>
 	<h1>Cadastro de Curso</h1>
-	<form action="inserir" method="post" >
+	<form action="novo" method="post" >
 		Descrição: <input type="text" name="descricao" size="30"><br/>
 		</br>
 		* Escola: <select name="escola" required>
@@ -20,6 +20,7 @@
         </select>
 		</br></br>
 		<input type="submit" value="Incluir"/>
+		<a href="../menu.jsp">Voltar</a>
 		${msg}
 	</form>
 </body>

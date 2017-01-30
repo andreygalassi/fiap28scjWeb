@@ -1,6 +1,8 @@
 package br.com.fiap.servlet.curso;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -11,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.com.fiap.dao.GenericDao;
+import br.com.fiap.entity.Curso;
 import br.com.fiap.entity.Escola;
 
 /**
@@ -39,6 +42,31 @@ public class ServletCursoNovo extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+//		PrintWriter out = response.getWriter();
+//		InputStream inputStream = null;
+//		doGet(request, response);
+		try {
+			String descricao = request.getParameter("descricao");
+			int idEscola = Integer.parseInt(request.getParameter("escola"));
+
+			Curso curso = new Curso();
+			curso.setDescricao(descricao);
+			
+			GenericDao<Escola> daoEscola = new GenericDao<Escola>(Escola.class);
+			Escola escola = daoEscola.buscar(idEscola);
+			curso.setEscola(escola);
+			
+			request.setAttribute("escolas", daoEscola.listar());
+			
+			GenericDao<Curso> dao = new GenericDao<Curso>(Curso.class);
+			dao.adicionar(curso);
+
+			request.setAttribute("msg", "Curso(a) " + curso.getDescricao() + " incluído(a)");
+		} catch (Exception e) {
+			request.setAttribute("msg", "Erro " + e.getMessage());
+		} finally {
+			request.getRequestDispatcher("novo.jsp").forward(request, response);
+		}
 	}
 
 }

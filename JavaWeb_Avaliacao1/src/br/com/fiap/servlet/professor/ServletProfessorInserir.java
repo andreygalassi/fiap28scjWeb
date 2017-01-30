@@ -14,8 +14,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.com.fiap.dao.GenericDao;
+import br.com.fiap.dao.UsuarioDao;
 import br.com.fiap.entity.Escola;
 import br.com.fiap.entity.Professor;
+import br.com.fiap.entity.TipoUsuario;
+import br.com.fiap.entity.Usuario;
 
 /**
  * Servlet implementation class ServletCadastroLivro
@@ -44,6 +47,22 @@ public class ServletProfessorInserir extends HttpServlet {
 			String nome = request.getParameter("nome");
 			String[] idEscolas = request.getParameterValues("escola");
 			Set<Escola> escolas = new HashSet<>();
+			String login = request.getParameter("login");
+			String senha = request.getParameter("login");
+
+			if (login==null){
+				throw new RuntimeException("Login é obrigatório");
+			}
+			if (senha==null){
+				throw new RuntimeException("Senha é obrigatório");
+			}
+			
+			UsuarioDao usuarioDao = new UsuarioDao();
+			if (usuarioDao.existe(login)){
+				throw new RuntimeException("Login já esta cadastrado");
+			}
+			
+			Usuario usuario = new Usuario(nome, senha, TipoUsuario.ALUNO);
 			
 			GenericDao<Escola> daoEscola = new GenericDao<Escola>(Escola.class);
 			
@@ -56,6 +75,7 @@ public class ServletProfessorInserir extends HttpServlet {
 			professor.setNome(nome);
 			
 			professor.setEscolas(escolas);
+			professor.setUsuario(usuario);
 			
 			GenericDao<Professor> dao = new GenericDao<Professor>(Professor.class);
 			dao.adicionar(professor);

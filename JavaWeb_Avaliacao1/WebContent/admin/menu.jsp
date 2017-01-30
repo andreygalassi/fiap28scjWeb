@@ -11,16 +11,16 @@
 	<h1>Menu de Opções</h1>
 
 	<ul>
-		<li><a href="aluno/novo.jsp">Novo Aluno</a></li>
-		<li><a href="aluno/listas.jsp">Lista de alunos</a></li>
-		<li><a href="curso/novo.jsp">Novo Curso</a></li>
+		<li><a href="aluno/novo">Novo Aluno</a></li>
+		<li><a href="aluno/lista.jsp">Lista de alunos</a></li>
+		<li><a href="curso/novo">Novo Curso</a></li>
 		<li><a href="curso/lista.jsp">Lista de cursos</a></li>
-		<li><a href="disciplina/novo.jsp">Nova Disciplina</a></li>
+		<li><a href="disciplina/novo">Nova Disciplina</a></li>
 		<li><a href="disciplina/lista.jsp">Lista de disciplinas</a></li>
-		<li><a href="escola/novo.jsp">Nova Escola</a></li>
+		<li><a href="escola/inserir">Nova Escola</a></li>
 		<li><a href="escola/lista.jsp">Lista de escolas</a></li>
-		<li><a href="professor/novo.jsp">Novo Professor</a></li>
-		<li><a href="professor/lista.jsp">Lista de prodessores</a></li>
+		<li><a href="professor/novo">Novo Professor</a></li>
+		<li><a href="professor/lista.jsp">Lista de professores</a></li>
 	</ul>
 
 </body>
