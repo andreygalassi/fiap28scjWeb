@@ -28,21 +28,14 @@ import br.com.fiap.entity.Usuario;
 public class ServletProfessorInserir extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public ServletProfessorInserir() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		PrintWriter out = response.getWriter();
-		InputStream inputStream = null;
+		String msg = "";
 		try {
 			String nome = request.getParameter("nome");
 			String[] idEscolas = request.getParameterValues("escola");
@@ -51,18 +44,18 @@ public class ServletProfessorInserir extends HttpServlet {
 			String senha = request.getParameter("login");
 
 			if (login==null){
-				throw new RuntimeException("Login é obrigatório");
+				throw new RuntimeException("Login ï¿½ obrigatï¿½rio");
 			}
 			if (senha==null){
-				throw new RuntimeException("Senha é obrigatório");
+				throw new RuntimeException("Senha ï¿½ obrigatï¿½rio");
 			}
 			
 			UsuarioDao usuarioDao = new UsuarioDao();
 			if (usuarioDao.existe(login)){
-				throw new RuntimeException("Login já esta cadastrado");
+				throw new RuntimeException("Login jï¿½ esta cadastrado");
 			}
 			
-			Usuario usuario = new Usuario(nome, senha, TipoUsuario.ALUNO);
+			Usuario usuario = new Usuario(nome, senha, TipoUsuario.PROFESSOR);
 			
 			GenericDao<Escola> daoEscola = new GenericDao<Escola>(Escola.class);
 			
@@ -80,11 +73,11 @@ public class ServletProfessorInserir extends HttpServlet {
 			GenericDao<Professor> dao = new GenericDao<Professor>(Professor.class);
 			dao.adicionar(professor);
 
-			request.setAttribute("msg", "Professor(a) " + professor.getNome() + " incluÃ­do(a)");
+			msg = "Professor(a) " + professor.getNome() + " incluÃ­do(a)";
 		} catch (Exception e) {
-			request.setAttribute("msg", "Erro " + e.getMessage());
+			msg = "Erro " + e.getMessage();
 		} finally {
-			request.getRequestDispatcher("novo.jsp").forward(request, response);
+			response.sendRedirect("novo?msg=" + msg);
 		}
 	}
 

@@ -20,7 +20,7 @@
 				<td><a href="alunosPorCurso?id=${item.id}">${item.escola.descricao}</a></td>
 			</tr>
 		</c:forEach>
-	</table>
-		<a href="../menu.jsp">Voltar</a>
+	</table></br></br>
+		<a href="../menu.jsp">Voltar</a></br></br>
 </body>
 </html>

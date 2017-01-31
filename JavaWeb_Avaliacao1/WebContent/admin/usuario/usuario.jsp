@@ -4,16 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Cadastro de Escola</title>
+<title>Insert title here</title>
 </head>
 <body>
-	<h1>Cadastro de Escola</h1>
-	<form action="inserir" method="post" > 
-		* Nome: <input type="text" name="descricao" size="30" required>
-		</br></br>
-		<input type="submit" value="Incluir"/><br><br>
-		<a href="../menu.jsp">Voltar</a></br></br>
-		${msg}
-	</form>
+
 </body>
 </html>

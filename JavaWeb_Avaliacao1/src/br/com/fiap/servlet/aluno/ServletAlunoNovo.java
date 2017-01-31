@@ -21,19 +21,15 @@ import br.com.fiap.entity.Curso;
 public class ServletAlunoNovo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public ServletAlunoNovo() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String msg = request.getParameter("msg");
 		
 		GenericDao<Curso> dao = new GenericDao<Curso>(Curso.class);
 		List<Curso> cursos = dao.listar();
 		request.setAttribute("cursos", cursos);
+		request.setAttribute("msg", msg);
 		request.getRequestDispatcher("novo.jsp").forward(request, response);
 	}
 

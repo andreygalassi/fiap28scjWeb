@@ -16,7 +16,7 @@
 				<td>${item.descricao}</td>
 			</tr>
 		</c:forEach>
-	</table>
+	</table></br></br>
 		<a href="../menu.jsp">Voltar</a>
 </body>
 </html>

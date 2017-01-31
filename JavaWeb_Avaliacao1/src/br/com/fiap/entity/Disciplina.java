@@ -82,4 +82,9 @@ public class Disciplina implements Serializable {
 		return dao.listar();
 	}
 
+	@Override
+	public String toString() {
+		return String.format("Disciplina [descricao=%s]", descricao);
+	}
+
 }

@@ -5,10 +5,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Cadastro de Notas</title>
+<title>Notas</title>
 </head>
 <body>
-	<h1>Cadastro de Notas de ${nomeAluno}</h1>
+	<h1>Notas de ${nomeAluno}</h1>
 		${msg}
+		</br></br>
+		<a href="../menu.jsp">Ir para o menu</a><br><br>
 </body>
 </html>

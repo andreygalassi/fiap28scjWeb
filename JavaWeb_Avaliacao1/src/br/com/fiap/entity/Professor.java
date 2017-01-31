@@ -29,7 +29,7 @@ public class Professor implements Serializable {
 
 	private String nome;
 
-	@OneToMany(mappedBy = "professor")
+	@OneToMany(mappedBy = "professor", fetch = FetchType.EAGER)
 	private Set<Disciplina> disciplinas;
 
 	@OneToOne(cascade={CascadeType.MERGE,CascadeType.PERSIST}, fetch=FetchType.LAZY)

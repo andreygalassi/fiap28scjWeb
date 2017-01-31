@@ -18,7 +18,7 @@
 				<td>${item.professor.nome}</td>
 			</tr>
 		</c:forEach>
-	</table>
-		<a href="../menu.jsp">Voltar</a>
+	</table></br></br>
+		<a href="../menu.jsp">Voltar</a></br></br>
 </body>
 </html>

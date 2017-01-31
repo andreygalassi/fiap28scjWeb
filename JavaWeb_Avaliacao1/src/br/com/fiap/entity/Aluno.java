@@ -1,6 +1,7 @@
 package br.com.fiap.entity;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -12,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -34,9 +36,9 @@ public class Aluno implements Serializable {
 	
 	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.MERGE)
 	private Curso curso;
-	
-	@OneToOne(cascade = CascadeType.ALL)
-	private Nota nota;
+
+	@OneToMany(mappedBy="aluno", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private Set<Nota> notas;
 
 	@OneToOne(cascade={CascadeType.MERGE,CascadeType.PERSIST}, fetch=FetchType.LAZY)
 	private Usuario usuario;
@@ -86,12 +88,29 @@ public class Aluno implements Serializable {
 		return dao.listar();
 	}
 
-	public Nota getNota() {
-		return nota;
+//	public Nota getNota() {
+//		return nota;
+//	}
+//
+//	public void setNota(Nota nota) {
+//		this.nota = nota;
+//	}
+
+	public Set<Nota> getNotas() {
+		return notas;
 	}
 
-	public void setNota(Nota nota) {
-		this.nota = nota;
+	public void setNotas(Set<Nota> notas) {
+		this.notas = notas;
 	}
+
+	public void addNotas(Nota nota) {
+		if (notas==null){
+			notas = new HashSet<>();
+		}
+		this.notas.add(nota);
+	}
+	
+	
 
 }

@@ -17,6 +17,11 @@
 		</br>
 		Projeto 2: <input type="number" step="0.01" name="projeto2" size="10" min="0" max="10" required><br/>
 		</br>
+		* Disciplina: <select name="disciplina" required>
+          <c:forEach var="item" items="${disciplinas}">
+            <option value="${item.id}">${item.descricao}</option>
+          </c:forEach>
+		</br>
 		<input type="submit" value="Inserir"/>
 		${msg}
 	</form>

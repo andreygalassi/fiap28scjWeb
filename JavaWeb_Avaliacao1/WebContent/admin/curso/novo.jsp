@@ -9,8 +9,8 @@
 </head>
 <body>
 	<h1>Cadastro de Curso</h1>
-	<form action="novo" method="post" >
-		Descrição: <input type="text" name="descricao" size="30"><br/>
+	<form action="inserir" method="post" >
+		* Descrição: <input type="text" name="descricao" size="30" required><br/>
 		</br>
 		* Escola: <select name="escola" required>
 		  <option value=""></option>
@@ -19,8 +19,15 @@
           </c:forEach>
         </select>
 		</br></br>
-		<input type="submit" value="Incluir"/>
-		<a href="../menu.jsp">Voltar</a>
+		* Professor: <select name="professor" required>
+		  <option value=""></option>
+          <c:forEach var="item" items="${professores}">
+            <option value="${item.id}">${item.nome}</option>
+          </c:forEach>
+        </select>
+		</br></br>
+		<input type="submit" value="Incluir"/><br><br>
+		<a href="../menu.jsp">Voltar</a><br><br>
 		${msg}
 	</form>
 </body>

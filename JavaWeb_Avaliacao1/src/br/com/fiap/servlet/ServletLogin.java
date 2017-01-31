@@ -37,31 +37,18 @@ public class ServletLogin extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		// Recebendo dados do formulario
-//		String nome = request.getParameter("nome");
-//		String senha = request.getParameter("senha");
-//
-//		// Lemndo os parametros de inicializacao
-//		String user = this.getServletConfig().getInitParameter("user");
-//		String pwd = this.getServletConfig().getInitParameter("pwd");
-//		
-//		if (nome.equals(user) && senha.equals(pwd)) {
-//			response.sendRedirect("admin/menu.jsp");
-//		} else{
-//			response.sendRedirect("login.jsp");
-//		}
-		
 		try {
 			String nome = request.getParameter("nome");
 			String senha = request.getParameter("senha");
 
 			UsuarioDao dao = new UsuarioDao();
-			Usuario usuario = dao.buscarUsuario("admin", "admin");
+			Usuario usuario = dao.buscarUsuario(nome, senha);
 
 			if (usuario != null) {
 
 				HttpSession session = request.getSession();
 				session.setAttribute("session_usuario", usuario);
+				session.setAttribute("session_tipo", usuario.getTipoUsuario().name());
 				response.sendRedirect("admin/menu.jsp");
 			} else {
 				response.sendRedirect("login.jsp");

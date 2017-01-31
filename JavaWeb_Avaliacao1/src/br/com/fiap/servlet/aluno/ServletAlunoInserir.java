@@ -1,8 +1,6 @@
 package br.com.fiap.servlet.aluno;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -10,7 +8,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.transaction.Transactional;
 
 import br.com.fiap.dao.GenericDao;
 import br.com.fiap.dao.UsuarioDao;
@@ -27,21 +24,14 @@ import br.com.fiap.entity.Usuario;
 public class ServletAlunoInserir extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public ServletAlunoInserir() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		PrintWriter out = response.getWriter();
-		InputStream inputStream = null;
+		String msg = "";
 		try {
 			String nome = request.getParameter("nome");
 			int idCurso = Integer.parseInt(request.getParameter("curso"));
@@ -73,11 +63,11 @@ public class ServletAlunoInserir extends HttpServlet {
 			GenericDao<Aluno> dao = new GenericDao<Aluno>(Aluno.class);
 			dao.adicionar(aluno);
 
-			request.setAttribute("msg", "Aluno(a) " + aluno.getNome() + " incluÃ­do(a)");
+			msg = "Aluno(a) " + aluno.getNome() + " incluído(a)";
 		} catch (Exception e) {
-			request.setAttribute("msg", "Erro " + e.getMessage());
+			msg = "Erro " + e.getMessage();
 		} finally {
-			request.getRequestDispatcher("novo.jsp").forward(request, response);
+			response.sendRedirect("novo?msg=" + msg);
 		}
 	}
 }

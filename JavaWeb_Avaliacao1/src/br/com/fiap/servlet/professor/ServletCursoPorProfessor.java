@@ -1,4 +1,4 @@
-package br.com.fiap.servlet.curso;
+package br.com.fiap.servlet.professor;
 
 import java.io.IOException;
 import java.util.List;
@@ -9,16 +9,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import br.com.fiap.dao.AlunoDao;
+import br.com.fiap.dao.CursoDao;
 import br.com.fiap.dao.GenericDao;
-import br.com.fiap.entity.Aluno;
 import br.com.fiap.entity.Curso;
+import br.com.fiap.entity.Professor;
 
-@WebServlet("/admin/curso/alunosPorCurso")
-public class ServletAlunoPorCurso extends HttpServlet {
+@WebServlet("/admin/professor/cursosPorProfessor")
+public class ServletCursoPorProfessor extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	public ServletAlunoPorCurso() {
+	
+	public ServletCursoPorProfessor() {
 		super();
 	}
 
@@ -26,14 +26,13 @@ public class ServletAlunoPorCurso extends HttpServlet {
 			throws ServletException, IOException {
 		try {
 			int id = Integer.parseInt(request.getParameter("id"));
-			GenericDao<Curso> dao = new GenericDao<>(Curso.class);
+			GenericDao<Professor> dao = new GenericDao<>(Professor.class);
 
-			Curso curso = dao.buscar(id);
-			List<Aluno> alunos = new AlunoDao().buscarPorProfessor(id);
-			
-			request.setAttribute("listaAlunos", alunos);
-			request.setAttribute("descricaoCurso", curso.getDescricao());
-			request.getRequestDispatcher("listaAlunosPorCurso.jsp").forward(request, response);
+			Professor professor = dao.buscar(id);
+			List<Curso> cursos = new CursoDao().buscarPorProfessor(id);
+			request.setAttribute("listaCursos", cursos);
+			request.setAttribute("nomeProfessor", professor.getNome());
+			request.getRequestDispatcher("listaCursosPorProfessor.jsp").forward(request, response);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -44,5 +43,5 @@ public class ServletAlunoPorCurso extends HttpServlet {
 			throws ServletException, IOException {
 
 	}
+	
 }
-

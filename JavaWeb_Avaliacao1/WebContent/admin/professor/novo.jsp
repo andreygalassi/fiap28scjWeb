@@ -10,21 +10,20 @@
 <body>
 	<h1>Cadastro de Professor</h1>
 	<form action="inserir" method="post" >
-		* Nome: <input type="text" name="nome" size="30">
+		* Nome: <input type="text" name="nome" size="30" required>
 		<br><br>
 		* Login: <input type="text" name="login" size="30">
 		<br><br>
 		* Senha: <input type="password" name="senha" size="30"><br/>
 		</br>
 		* Escola: <select name="escola" required multiple>
-		  <option value=""></option>
           <c:forEach var="item" items="${escolas}">
             <option value="${item.id}">${item.descricao}</option>
           </c:forEach>
         </select>
 		</br></br>
-		<input type="submit" value="Incluir"/>
-		<a href="../menu.jsp">Voltar</a>
+		<input type="submit" value="Incluir"/><br><br>
+		<a href="../menu.jsp">Voltar</a></br></br>
 		${msg}
 	</form>
 </body>

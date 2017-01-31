@@ -1,8 +1,6 @@
 package br.com.fiap.servlet.curso;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -24,11 +22,6 @@ import br.com.fiap.entity.Professor;
 public class ServletCursoInserir extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public ServletCursoInserir() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
@@ -36,11 +29,11 @@ public class ServletCursoInserir extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		PrintWriter out = response.getWriter();
-		InputStream inputStream = null;
+		String msg = "";
 		try {
 			String descricao = request.getParameter("descricao");
 			int idEscola = Integer.parseInt(request.getParameter("escola"));
+			int idProfessor = Integer.parseInt(request.getParameter("professor"));
 
 			Curso curso = new Curso();
 			curso.setDescricao(descricao);
@@ -49,14 +42,18 @@ public class ServletCursoInserir extends HttpServlet {
 			Escola escola = daoEscola.buscar(idEscola);
 			curso.setEscola(escola);
 			
+			GenericDao<Professor> daoProfessor = new GenericDao<Professor>(Professor.class);
+			Professor professor = daoProfessor.buscar(idProfessor);
+			curso.setProfessor(professor);
+			
 			GenericDao<Curso> dao = new GenericDao<Curso>(Curso.class);
 			dao.adicionar(curso);
 
-			request.setAttribute("msg", "Curso(a) " + curso.getDescricao() + " incluído(a)");
+			msg = "Curso(a) " + curso.getDescricao() + " incluído(a)";
 		} catch (Exception e) {
-			request.setAttribute("msg", "Erro " + e.getMessage());
+			msg = "Erro " + e.getMessage();
 		} finally {
-			request.getRequestDispatcher("novo.jsp").forward(request, response);
+			response.sendRedirect("novo?msg=" + msg);
 		}
 	}
 
