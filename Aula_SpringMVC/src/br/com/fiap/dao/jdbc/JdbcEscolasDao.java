@@ -20,7 +20,7 @@ public class JdbcEscolasDao {
 
 	public void incluirEscola(Escola escola) throws Exception {
 	try {
-	String query = "INSERT INTO ESCOLAS (DESCRICAO,ENDERECO,DATAFUNDACAO) VALUES (?,?,?)";
+	String query = "INSERT INTO ESCOLA (DESCRICAO,ENDERECO,DATAFUNDACAO) VALUES (?,?,?)";
 	jdbcTemplate.update(query,
 	escola.getDescricao(),escola.getEndereco(),escola.getDataFundacao());
 	} catch (Exception e) {
@@ -31,7 +31,7 @@ public class JdbcEscolasDao {
 	public Escola buscarEscola(int id) throws Exception {
 		Escola escola = null;
 		try {
-			String query = "SELECT * FROM ESCOLAS WHERE ID=?";
+			String query = "SELECT * FROM ESCOLA WHERE ID=?";
 			escola = jdbcTemplate.queryForObject(query, new Integer[] { id }, new EscolaMapper());
 		} catch (Exception e) {
 			throw e;
@@ -42,7 +42,7 @@ public class JdbcEscolasDao {
 	public List<Escola> listarEscolas() throws Exception {
 		List<Escola> escolas = new ArrayList<>();
 		try {
-			escolas = jdbcTemplate.query("SELECT * FROM ESCOLAS", new EscolaMapper());
+			escolas = jdbcTemplate.query("SELECT * FROM ESCOLA", new EscolaMapper());
 		} catch (Exception e) {
 			throw e;
 		}
