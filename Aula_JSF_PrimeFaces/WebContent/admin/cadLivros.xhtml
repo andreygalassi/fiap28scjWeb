@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Cadastro de Livros</title>
+</h:head>
+<h:body>
+	<ui:composition template="layout.xhtml">
+		<ui:define name="conteudo">
+			<h:form>
+				<p:panelGrid columns="2">
+					<f:facet name="header">
+						<h2>
+							<p:outputLabel value="Cadastro de Livros" />
+						</h2>
+					</f:facet>
+					<p:outputLabel value="#{msg.codigo}" />
+					<p:inputText value="#{livrosBean.livro.codigo}" />
+
+					<p:outputLabel value="#{msg.titulo}" />
+					<p:inputText value="#{livrosBean.livro.titulo}" />
+
+					<p:outputLabel value="#{msg.autor}" />
+					<p:inputText value="#{livrosBean.livro.autor}" />
+
+					<p:outputLabel value="#{msg.data}" />
+					<p:calendar value="#{livrosBean.livro.dataPublicacao}"
+					 	pattern="dd/mm/yyyy"
+					 	showOn="true">
+						<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR"
+							timeZone="GMT-3" />
+					</p:calendar>
+
+					<p:outputLabel value="#{msg.preco}" />
+					<p:inputText value="#{livrosBean.livro.preco}" />
+
+					<p:outputLabel />
+					<p:commandButton action="#{livrosBean.incluirLivro}"
+						value="Incluir" 
+						update="@form :tabela"
+						process="@form"/>
+				</p:panelGrid>
+				<p:messages showSummary="true" showDetail="true"></p:messages>
+			</h:form>
+			
+			<h:form id="tabela">
+				<p:dataTable value="#{livrosBean.listaLivros}" var="book"
+					styleClass="tabela" headerClass="cabecalho"
+					columnClasses="col1,col2,col3,col4">
+					<p:column>
+						<f:facet name="header">
+							<p:outputLabel value="CODIGO" />
+						</f:facet>
+						<p:outputLabel value="#{book.codigo}" />
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">
+							<p:outputLabel value="TITULO" />
+						</f:facet>
+						<p:outputLabel value="#{book.titulo}" />
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">
+							<p:outputLabel value="AUTOR" />
+						</f:facet>
+						<p:outputLabel value="#{book.autor}" />
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">
+							<p:outputLabel value="DATA PUB." />
+						</f:facet>
+						<p:outputLabel value="#{book.dataPublicacao}">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</p:outputLabel>
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">
+							<p:outputLabel value="PREÇO" />
+						</f:facet>
+						<p:outputLabel value="#{book.preco}">
+							<f:convertNumber type="currency" locale="pt_BR" />
+						</p:outputLabel>
+					</p:column>
+
+				</p:dataTable>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>
