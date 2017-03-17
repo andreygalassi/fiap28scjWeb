@@ -6,41 +6,11 @@
     xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<title>Cadastro de Compradores</title>
+	<title>Lista de Compradores</title>
 </h:head>
 <h:body>
 	<ui:composition template="layout.xhtml">
 		<ui:define name="conteudo">
-			<h:form>
-				<p:growl id="growl" showDetail="true" sticky="true" />
-				<p:panelGrid columns="2">
-					<f:facet name="header">
-						<h2>
-							<p:outputLabel value="Cadastro de Compradores" />
-						</h2>
-					</f:facet>
-					<p:outputLabel value="#{msg.codigol}" />
-					<p:selectOneMenu value="#{compBean.codComprador}">
-						<f:selectItems value="#{livrosBean.listaLivros}"
-					     var="livro"
-						 itemLabel="#{livro.titulo}"
-						 itemValue="#{livro.codigo}" />
-					</p:selectOneMenu>
-
-					<p:outputLabel value="#{msg.nome}" />
-					<p:inputText value="#{compBean.comprador.nome}" />
-
-					<p:outputLabel value="#{msg.email}" />
-					<p:inputText value="#{compBean.comprador.email}" />
-
-
-					<p:outputLabel />
-					<p:commandButton action="#{compBean.incluirComprador}" value="Incluir"
-					 	update="@form :tabela" process="@form" />
-				</p:panelGrid>
-<!-- 				<h:messages showSummary="true" showDetail="true"></h:messages> -->
-			</h:form>
-			
 			<h:form id="tabela">
 				<p:dataTable value="#{compBean.listaCompradores}" var="comp"
 					styleClass="tabela" headerClass="cabecalho"

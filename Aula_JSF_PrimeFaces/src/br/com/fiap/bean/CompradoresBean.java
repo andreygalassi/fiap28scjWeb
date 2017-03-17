@@ -1,5 +1,7 @@
 package br.com.fiap.bean;
 
+import java.util.List;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -8,6 +10,7 @@ import javax.faces.context.FacesContext;
 
 import br.com.fiap.dao.CompradoresDao;
 import br.com.fiap.entity.Compradores;
+import br.com.fiap.entity.Livros;
 import br.com.fiap.repository.RepositoryDao;
 
 @ManagedBean(name="compBean")
@@ -55,6 +58,15 @@ public class CompradoresBean {
 			msg.setSeverity(FacesMessage.SEVERITY_INFO);
 		}
 		context.addMessage(null, msg);
+	}
+
+	public List<Compradores> getListaCompradores() throws Exception {
+		return RepositoryDao.getCompradoresDao().listar();
+	}
+
+	public List<Compradores> getListaCompradores(String id) throws Exception {
+		System.out.println("teste"+id);
+		return RepositoryDao.getCompradoresDao().listar();
 	}
 	
 	

@@ -2,6 +2,7 @@ package br.com.fiap.bean;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -11,6 +12,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
 
 import br.com.fiap.dao.LivrosDao;
+import br.com.fiap.entity.Compradores;
 import br.com.fiap.entity.Livros;
 import br.com.fiap.repository.RepositoryDao;
 
@@ -23,6 +25,8 @@ public class LivrosBean {
 	
 	private String local;
 	private String idiomas[] = { "portugues", "ingles" };
+	
+	private Set<Compradores> listaComrpadores;
 
 	public Livros getLivro() {
 		return livro;
@@ -70,6 +74,7 @@ public class LivrosBean {
 	public List<Livros> getListaLivros() throws Exception {
 		return RepositoryDao.getLivrosDao().listar();
 	}
+	
 
 	// alteracao do idioma
 	public void alterarIdioma(ValueChangeEvent e) {
@@ -80,6 +85,18 @@ public class LivrosBean {
 		} else {
 			FacesContext.getCurrentInstance().getViewRoot()
 					.setLocale(new Locale("pt", "BR"));
+		}
+	}
+	
+	public void setCompradores(Livros livros){
+		listaComrpadores = livros.getCompradores();
+	}
+	
+	public Set<Compradores> listaCompradores(){
+		if (listaComrpadores!=null){
+			return listaComrpadores;
+		}else{
+			return null;
 		}
 	}
 }

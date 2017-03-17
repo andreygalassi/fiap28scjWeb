@@ -12,6 +12,7 @@
 	<ui:composition template="layout.xhtml">
 		<ui:define name="conteudo">
 			<h:form>
+				<p:growl id="growl" showDetail="true" sticky="true" />
 				<p:panelGrid columns="2">
 					<f:facet name="header">
 						<h2>
@@ -44,7 +45,7 @@
 						update="@form :tabela"
 						process="@form"/>
 				</p:panelGrid>
-				<p:messages showSummary="true" showDetail="true"></p:messages>
+<!-- 				<p:messages showSummary="true" showDetail="true"></p:messages> -->
 			</h:form>
 			
 			<h:form id="tabela">
@@ -89,7 +90,43 @@
 							<f:convertNumber type="currency" locale="pt_BR" />
 						</p:outputLabel>
 					</p:column>
+					
+			        <p:column style="width:32px;text-align: center">
+			             <p:commandButton 
+			             		action="#{livrosBean.setCompradores(book)}" 
+			             		update="tabela2"
+			             		icon="ui-icon-search" 
+			             		title="View">
+			            </p:commandButton>
+			        </p:column>
 
+				</p:dataTable>
+			</h:form>
+			
+			<h:form id="tabela2" >
+				<p:dataTable value="#{livrosBean.listaCompradores()}" var="comp"
+					styleClass="tabela" headerClass="cabecalho"
+					columnClasses="col1,col2,col3">
+					<p:column>
+						<f:facet name="header">
+							<p:outputLabel value="CODIGO" />
+						</f:facet>
+						<p:outputLabel value="#{comp.codigo}" />
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">
+							<p:outputLabel value="NOME" />
+						</f:facet>
+						<p:outputLabel value="#{comp.nome}" />
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">
+							<p:outputLabel value="E-MAIL" />
+						</f:facet>
+						<p:outputLabel value="#{comp.email}" />
+					</p:column>
 				</p:dataTable>
 			</h:form>
 		</ui:define>
